@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User } from '@/lib/types';
+import { fetchUserDetail } from '@/lib/api-client';
 
 export interface CartItem {
   menuId: number;
@@ -46,10 +47,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const refreshPoints = async () => {
     try {
-      const res = await fetch(`/api/users/${currentUser.id}`);
-      if (res.ok) {
-        const data = await res.json();
-        setUserPoints(data.points || { availablePoints: 0, pendingPoints: 0 });
+      const data = await fetchUserDetail(currentUser.id);
+      if (data && data.points) {
+        setUserPoints(data.points);
       }
     } catch (e) {
       console.error(e);

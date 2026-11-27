@@ -9,6 +9,7 @@
 # next.js
 /.next/
 /out/
+src/_temp_api
 
 # production
 /build

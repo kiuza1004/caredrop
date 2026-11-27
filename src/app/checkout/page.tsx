@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useApp } from '@/context/AppContext';
-import { Sparkles, ShieldAlert, CreditCard, ChevronDown, Check, ArrowRight, Minus, Plus, AlertCircle } from 'lucide-react';
+import { Sparkles, ShieldAlert, CreditCard, Minus, Plus } from 'lucide-react';
 import { CardMatchResult } from '@/lib/types';
+import { matchOrderReward, submitOrderApi, fetchUserDetail } from '@/lib/api-client';
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -30,8 +31,7 @@ export default function CheckoutPage() {
 
   // 유저 수신 카드 목록 조회
   useEffect(() => {
-    fetch(`/api/users/${currentUser.id}`)
-      .then((res) => res.json())
+    fetchUserDetail(currentUser.id)
       .then((data) => {
         const cards = (data.receivedCards || []).filter((c: any) => c.store_id === storeId);
         setUserReceivedCards(cards);
@@ -43,17 +43,12 @@ export default function CheckoutPage() {
   useEffect(() => {
     if (cart.length === 0) return;
 
-    fetch('/api/orders/match', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        buyerUserId: currentUser.id,
-        storeId,
-        orderAmount: cartTotal,
-        selectedCardId,
-      }),
+    matchOrderReward({
+      buyerUserId: currentUser.id,
+      storeId,
+      orderAmount: cartTotal,
+      selectedCardId,
     })
-      .then((res) => res.json())
       .then((data) => {
         if (data.matchResult) {
           setMatchResult(data.matchResult);
@@ -65,7 +60,6 @@ export default function CheckoutPage() {
       .catch((e) => console.error(e));
   }, [currentUser.id, storeId, cartTotal, selectedCardId, cart.length]);
 
-  // 장바구니가 비어있는 경우 기본 예시 메뉴 세팅 버튼 제공
   const handleSetSampleOrder = () => {
     router.push('/store/1');
   };
@@ -89,24 +83,19 @@ export default function CheckoutPage() {
 
     setIsSubmitting(true);
     try {
-      const res = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          buyerUserId: currentUser.id,
-          storeId,
-          items: cart.map((i) => ({
-            menuId: i.menuId,
-            menuName: i.menuName,
-            price: i.price,
-            quantity: i.quantity,
-          })),
-          pointToUse,
-          selectedCardId,
-        }),
+      const data = await submitOrderApi({
+        buyerUserId: currentUser.id,
+        storeId,
+        items: cart.map((i) => ({
+          menuId: i.menuId,
+          menuName: i.menuName,
+          price: i.price,
+          quantity: i.quantity,
+        })),
+        pointToUse,
+        selectedCardId,
       });
 
-      const data = await res.json();
       if (data.success && data.orderId) {
         clearCart();
         refreshPoints();

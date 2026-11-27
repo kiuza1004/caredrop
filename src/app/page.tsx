@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Store as StoreIcon, Sparkles, ChevronRight, Award, Zap, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
+import { fetchStores } from '@/lib/api-client';
 
 export default function HomePage() {
   const { currentUser } = useApp();
@@ -11,8 +12,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/stores')
-      .then((res) => res.json())
+    fetchStores()
       .then((data) => {
         setStores(data.stores || []);
         setLoading(false);

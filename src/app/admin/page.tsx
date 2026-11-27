@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { ShieldCheck, Database, DollarSign, RefreshCw, Layers } from 'lucide-react';
+import { fetchStores } from '@/lib/api-client';
 
 export default function PlatformAdminPage() {
   const [stores, setStores] = useState<any[]>([]);
@@ -9,8 +10,7 @@ export default function PlatformAdminPage() {
 
   const loadData = () => {
     setLoading(true);
-    fetch('/api/stores')
-      .then((res) => res.json())
+    fetchStores()
       .then((data) => {
         setStores(data.stores || []);
         setLoading(false);

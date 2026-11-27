@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useApp } from '@/context/AppContext';
 import { Sparkles, Clock, Share2, Layers, CheckCircle2, ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
+import { fetchUserDetail, confirmPointsBatchApi } from '@/lib/api-client';
 
 function MyPageContent() {
   const searchParams = useSearchParams();
@@ -18,8 +19,7 @@ function MyPageContent() {
 
   const loadUserData = () => {
     setLoading(true);
-    fetch(`/api/users/${currentUser.id}`)
-      .then((res) => res.json())
+    fetchUserDetail(currentUser.id)
       .then((data) => {
         setUserData(data);
         setLoading(false);
@@ -38,12 +38,7 @@ function MyPageContent() {
   const handleForceConfirmPoints = async () => {
     setIsConfirming(true);
     try {
-      const res = await fetch('/api/admin/confirm-points', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ forceImmediate: true }),
-      });
-      const data = await res.json();
+      const data = await confirmPointsBatchApi();
       alert(data.message || '포인트가 확정되었습니다.');
       refreshPoints();
       loadUserData();

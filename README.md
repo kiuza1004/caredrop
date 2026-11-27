@@ -1,8 +1,10 @@
 # CareDrop — 원클릭 큐레이션 카드 인용형 바이럴 배달 플랫폼
 
+### 🚀 **웹 브라우저 즉시 실행 링크:**
+👉 **[https://kiuza1004.github.io/caredrop/](https://kiuza1004.github.io/caredrop/)**
+
+[![GitHub Pages Deployment](https://github.com/kiuza1004/caredrop/actions/workflows/deploy.yml/badge.svg)](https://github.com/kiuza1004/caredrop/actions/workflows/deploy.yml)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/kiuza1004/caredrop/codespaces)
-[![CI](https://github.com/kiuza1004/caredrop/actions/workflows/ci.yml/badge.svg)](https://github.com/kiuza1004/caredrop/actions/workflows/ci.yml)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/kiuza1004/caredrop)
 
 대한민국 **방문판매법(다단계 규제)을 100% 원천 봉쇄**하고, 사용자 마찰을 없앤 **Zero-Effort 3초 원클릭 바이럴 배달 플랫폼** CareDrop MVP입니다.
 
