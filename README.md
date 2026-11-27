@@ -1,13 +1,15 @@
 # CareDrop — 원클릭 큐레이션 카드 인용형 바이럴 배달 플랫폼
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/kiuza1004/caredrop)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/kiuza1004/caredrop/codespaces)
 [![CI](https://github.com/kiuza1004/caredrop/actions/workflows/ci.yml/badge.svg)](https://github.com/kiuza1004/caredrop/actions/workflows/ci.yml)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/kiuza1004/caredrop)
 
 대한민국 **방문판매법(다단계 규제)을 100% 원천 봉쇄**하고, 사용자 마찰을 없앤 **Zero-Effort 3초 원클릭 바이럴 배달 플랫폼** CareDrop MVP입니다.
 
-> 🚀 **GitHub에서 즉시 실행하는 방법:**  
-> 상단의 **`Open in GitHub Codespaces`** 배지를 클릭하면 브라우저 내 가상 환경에서 별도 설치 없이 30초 만에 바로 앱이 실행됩니다!
+> 🚀 **웹 브라우저에서 즉시 실행하는 방법:**  
+> 1. [https://github.com/kiuza1004/caredrop](https://github.com/kiuza1004/caredrop) 접속  
+> 2. 초록색 **`<> Code`** 버튼 클릭 $\rightarrow$ **`Codespaces`** 탭 $\rightarrow$ **`Create codespace on main`** 클릭  
+> 3. 브라우저 안에서 개발 서버가 자동 기동되어 모바일 웹앱 화면이 팝업됩니다!
 
 ---
 
